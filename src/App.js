@@ -13,13 +13,19 @@ function App() {
 
       setJoined(true);
 
-      rtc.client = AgoraRTC.createClient({ mode: "rtc", codec: "h264" });
+      rtc.client = AgoraRTC.createClient({ mode: "live", codec: "h264" });
       const uid = await rtc.client.join(
         options.appId,
         channelRef.current.value,
         options.token,
         null
       );
+
+      /*rtc.client.init(options.appId, function () {
+        console.log("AgoraRTC client initialized");
+      }, function (err) {
+        console.log("AgoraRTC client init failed", err);
+      });*/
 
       // Create an audio track from the audio captured by a microphone
       rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
